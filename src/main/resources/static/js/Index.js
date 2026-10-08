@@ -1,135 +1,163 @@
-// Navegação entre páginas
-const navLinks = document.querySelectorAll(".nav-link");
-const pages = document.querySelectorAll(".page");
+document.addEventListener("DOMContentLoaded", () => {
+  const toast = document.createElement("div");
+  toast.className = "toast";
+  document.body.appendChild(toast);
 
-navLinks.forEach(link => {
-  link.addEventListener("click", (e) => {
-    e.preventDefault();
+  const showToast = (message) => {
+    toast.textContent = message;
+    toast.classList.add("show");
+    clearTimeout(showToast.timeoutId);
+    showToast.timeoutId = setTimeout(() => {
+      toast.classList.remove("show");
+    }, 1800);
+  };
 
-    // Remove active de todos os links
-    navLinks.forEach(l => l.classList.remove("active"));
-    link.classList.add("active");
+  const cartKey = "cafeteriaCart";
+  const formatCurrency = (value) =>
+    new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+    }).format(value);
 
-    // Remove active de todas as páginas
-    pages.forEach(page => page.classList.remove("active"));
+  const getCart = () => {
+    try {
+      return JSON.parse(localStorage.getItem(cartKey)) || [];
+    } catch {
+      return [];
+    }
+  };
 
-    // Ativa a página correspondente
-    const pageId = link.getAttribute("data-page");
-    document.getElementById(pageId).classList.add("active");
-  });
-});
+  const saveCart = (cart) => {
+    localStorage.setItem(cartKey, JSON.stringify(cart));
+  };
 
-// Carrinho de pedidos
-let cart = [];
+  const addToCart = (name, price) => {
+    const cart = getCart();
+    const existing = cart.find((item) => item.name === name);
 
-const addBtns = document.querySelectorAll(".add-btn");
-
-addBtns.forEach(btn => {
-  btn.addEventListener("click", () => {
-    const name = btn.getAttribute("data-name");
-    const price = parseFloat(btn.getAttribute("data-price"));
-
-    const existingItem = cart.find(item => item.name === name);
-
-    if (existingItem) {
-      existingItem.quantity += 1;
+    if (existing) {
+      existing.quantity += 1;
     } else {
       cart.push({ name, price, quantity: 1 });
     }
 
-    updateCart();
-  });
-});
+    saveCart(cart);
+    showToast(`${name} adicionado ao pedido!`);
+  };
 
-// Atualizar carrinho
-function updateCart() {
-  const cartItemsDiv = document.getElementById("cartItems");
-  cartItemsDiv.innerHTML = "";
+  const renderCart = () => {
+    const cartItemsContainer = document.getElementById("cartItems");
+    if (!cartItemsContainer) return;
 
-  if (cart.length === 0) {
-    cartItemsDiv.innerHTML = '<p class="empty-message">Nenhum produto adicionado</p>';
-    document.getElementById("subtotal").textContent = "R$ 0,00";
-    document.getElementById("delivery").textContent = "R$ 0,00";
-    document.getElementById("total").textContent = "R$ 0,00";
-    return;
-  }
+    const cart = getCart();
+    if (!cart.length) {
+      cartItemsContainer.innerHTML = '<p class="empty-message">Nenhum produto adicionado</p>';
+      document.getElementById("subtotal").textContent = "R$ 0,00";
+      document.getElementById("delivery").textContent = "R$ 0,00";
+      document.getElementById("total").textContent = "R$ 0,00";
+      return;
+    }
 
-  let subtotal = 0;
+    const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    const deliveryFee = subtotal >= 80 ? 0 : 12;
+    const total = subtotal + deliveryFee;
 
-  cart.forEach(item => {
-    const itemTotal = item.price * item.quantity;
-    subtotal += itemTotal;
+    cartItemsContainer.innerHTML = cart
+      .map(
+        (item) =>
+          `<div class="cart-item">
+            <div class="cart-item-info">
+              <strong>${item.name}</strong>
+              <span>Qtd: ${item.quantity}</span>
+            </div>
+            <strong>${formatCurrency(item.price * item.quantity)}</strong>
+          </div>`
+      )
+      .join("");
 
-    const itemDiv = document.createElement("div");
-    itemDiv.className = "cart-item";
-    itemDiv.innerHTML = `
-      <div>
-        <strong>${item.name}</strong><br>
-        <small>Qtd: ${item.quantity}</small>
-      </div>
-      <span>R$ ${itemTotal.toFixed(2).replace(".", ",")}</span>
-    `;
-    cartItemsDiv.appendChild(itemDiv);
-  });
+    document.getElementById("subtotal").textContent = formatCurrency(subtotal);
+    document.getElementById("delivery").textContent = formatCurrency(deliveryFee);
+    document.getElementById("total").textContent = formatCurrency(total);
+  };
 
-  const delivery = cart.length > 0 ? 8 : 0;
-  const total = subtotal + delivery;
-
-  document.getElementById("subtotal").textContent = `R$ ${subtotal.toFixed(2).replace(".", ",")}`;
-  document.getElementById("delivery").textContent = `R$ ${delivery.toFixed(2).replace(".", ",")}`;
-  document.getElementById("total").textContent = `R$ ${total.toFixed(2).replace(".", ",")}`;
-}
-
-// Filtro de produtos
-const categoryBtns = document.querySelectorAll(".category-btn");
-const productCards = document.querySelectorAll(".product-card");
-
-categoryBtns.forEach(btn => {
-  btn.addEventListener("click", () => {
-    const filter = btn.getAttribute("data-filter");
-
-    categoryBtns.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-
-    productCards.forEach(card => {
-      const category = card.getAttribute("data-category");
-
-      if (filter === "todos" || category === filter) {
-        card.style.display = "block";
-      } else {
-        card.style.display = "none";
-      }
+  document.querySelectorAll(".add-btn").forEach((button) => {
+    button.addEventListener("click", () => {
+      const name = button.dataset.name;
+      const price = Number(button.dataset.price);
+      addToCart(name, price);
     });
   });
+
+  const filterProducts = () => {
+    const buttons = document.querySelectorAll(".category-btn");
+    const cards = document.querySelectorAll(".product-card");
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const selected = button.dataset.filter;
+
+        buttons.forEach((btn) => btn.classList.toggle("active", btn === button));
+        cards.forEach((card) => {
+          const matches = selected === "todos" || card.dataset.category === selected;
+          card.style.display = matches ? "flex" : "none";
+        });
+      });
+    });
+  };
+
+  const orderForm = document.getElementById("orderForm");
+  if (orderForm) {
+    orderForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const cart = getCart();
+      if (!cart.length) {
+        alert("Adicione pelo menos um produto antes de confirmar o pedido.");
+        return;
+      }
+
+      const formData = {
+        name: document.getElementById("clientName").value.trim(),
+        phone: document.getElementById("clientPhone").value.trim(),
+        address: document.getElementById("clientAddress").value.trim(),
+        city: document.getElementById("clientCity").value.trim(),
+        zip: document.getElementById("clientZip").value.trim(),
+        paymentMethod: document.getElementById("paymentMethod").value,
+        observations: document.getElementById("observations").value.trim()
+      };
+
+      const allFieldsFilled = Object.values(formData).every((value) => value !== "");
+      if (!allFieldsFilled) {
+        alert("Preencha todos os dados do pedido.");
+        return;
+      }
+
+      alert(`Pedido confirmado para ${formData.name}! Em breve entraremos em contato.`);
+      localStorage.removeItem(cartKey);
+      orderForm.reset();
+      renderCart();
+    });
+  }
+
+  const loginForm = document.getElementById("loginForm");
+  if (loginForm) {
+    loginForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const email = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPassword").value.trim();
+
+      if (!email || !password) {
+        alert("Informe seu email e senha.");
+        return;
+      }
+
+      localStorage.setItem("cafeteriaLoggedIn", "true");
+      alert("Login realizado com sucesso!");
+      window.location.href = "index.html";
+    });
+  }
+
+  renderCart();
+  filterProducts();
 });
-
-// Form de pedidos
-const orderForm = document.getElementById("orderForm");
-
-orderForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const name = document.getElementById("clientName").value;
-  const phone = document.getElementById("clientPhone").value;
-
-  alert(`Pedido confirmado para ${name}! Você será contatado pelo telefone ${phone}.`);
-
-  orderForm.reset();
-  cart = [];
-  updateCart();
-});
-
-// Form de login
-const loginForm = document.getElementById("loginForm");
-
-loginForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const email = document.getElementById("loginEmail").value;
-
-  alert(`Bem-vindo, ${email}!`);
-  loginForm.reset();
-});
-
-// Inicializar carrinho
-updateCart();

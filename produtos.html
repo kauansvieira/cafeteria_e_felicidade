@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Produtos | Cafeteria e Felicidade</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">Cafeteria <span>e Felicidade</span></a>
+
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="produtos.html" class="nav-link active">Produtos</a>
+        <a href="pedidos.html" class="nav-link">Pedidos</a>
+        <a href="login.html" class="nav-link">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="products-hero">
+      <div class="container">
+        <h1>Nosso cardápio</h1>
+        <p>Produtos feitos para deixar seu dia mais gostoso</p>
+      </div>
+    </section>
+
+    <section class="section products">
+      <div class="container">
+        <div class="category-menu">
+          <button class="category-btn active" data-filter="todos">Todos</button>
+          <button class="category-btn" data-filter="cafes">Cafés</button>
+          <button class="category-btn" data-filter="doces">Doces</button>
+          <button class="category-btn" data-filter="salgados">Salgados</button>
+        </div>
+
+        <div class="product-grid">
+          <article class="product-card" data-category="cafes">
+            <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=85" alt="Latte">
+            <div class="product-info">
+              <h3>Latte Cremoso</h3>
+              <p>Espresso suave com leite vaporizado e espuma cremosa.</p>
+              <div class="product-footer">
+                <strong>R$ 18,90</strong>
+                <button class="add-btn" data-name="Latte Cremoso" data-price="18.90">Adicionar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card" data-category="cafes">
+            <img src="https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=800&q=85" alt="Capuccino">
+            <div class="product-info">
+              <h3>Capuccino</h3>
+              <p>Café encorpado com leite e uma camada especial de espuma.</p>
+              <div class="product-footer">
+                <strong>R$ 16,50</strong>
+                <button class="add-btn" data-name="Capuccino" data-price="16.50">Adicionar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card" data-category="cafes">
+            <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=85" alt="Espresso">
+            <div class="product-info">
+              <h3>Espresso Tradicional</h3>
+              <p>Intenso, aromático e preparado com grãos selecionados.</p>
+              <div class="product-footer">
+                <strong>R$ 8,90</strong>
+                <button class="add-btn" data-name="Espresso Tradicional" data-price="8.90">Adicionar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card" data-category="cafes">
+            <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=800&q=85" alt="Mocha">
+            <div class="product-info">
+              <h3>Mocha de Chocolate</h3>
+              <p>A combinação perfeita entre café, leite e chocolate.</p>
+              <div class="product-footer">
+                <strong>R$ 19,90</strong>
+                <button class="add-btn" data-name="Mocha de Chocolate" data-price="19.90">Adicionar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card" data-category="doces">
+            <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=85" alt="Croissant">
+            <div class="product-info">
+              <h3>Croissant de Chocolate</h3>
+              <p>Massa crocante recheada com chocolate cremoso.</p>
+              <div class="product-footer">
+                <strong>R$ 12,00</strong>
+                <button class="add-btn" data-name="Croissant de Chocolate" data-price="12.00">Adicionar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card" data-category="doces">
+            <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=85" alt="Brownie">
+            <div class="product-info">
+              <h3>Brownie</h3>
+              <p>Chocolate intenso, textura macia e sabor irresistível.</p>
+              <div class="product-footer">
+                <strong>R$ 14,50</strong>
+                <button class="add-btn" data-name="Brownie" data-price="14.50">Adicionar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card" data-category="doces">
+            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=85" alt="Bolo">
+            <div class="product-info">
+              <h3>Bolo de Chocolate</h3>
+              <p>Fatia fofinha com cobertura cremosa de chocolate.</p>
+              <div class="product-footer">
+                <strong>R$ 15,00</strong>
+                <button class="add-btn" data-name="Bolo de Chocolate" data-price="15.00">Adicionar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card" data-category="doces">
+            <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=800&q=85" alt="Cheesecake">
+            <div class="product-info">
+              <h3>Cheesecake de Frutas</h3>
+              <p>Creme suave, base crocante e cobertura de frutas.</p>
+              <div class="product-footer">
+                <strong>R$ 17,90</strong>
+                <button class="add-btn" data-name="Cheesecake de Frutas" data-price="17.90">Adicionar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card" data-category="salgados">
+            <img src="https://images.unsplash.com/photo-1540713434306-58505cf1b6b8?auto=format&fit=crop&w=800&q=85" alt="Sanduíche">
+            <div class="product-info">
+              <h3>Sanduíche Natural</h3>
+              <p>Pão macio, frango, queijo, alface e molho especial.</p>
+              <div class="product-footer">
+                <strong>R$ 18,00</strong>
+                <button class="add-btn" data-name="Sanduíche Natural" data-price="18.00">Adicionar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card" data-category="salgados">
+            <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85" alt="Coxinha">
+            <div class="product-info">
+              <h3>Coxinha de Frango</h3>
+              <p>Massa crocante com recheio cremoso de frango.</p>
+              <div class="product-footer">
+                <strong>R$ 9,50</strong>
+                <button class="add-btn" data-name="Coxinha de Frango" data-price="9.50">Adicionar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card" data-category="salgados">
+            <img src="https://images.unsplash.com/photo-1627662168223-7df99068099a?auto=format&fit=crop&w=800&q=85" alt="Pão de Queijo">
+            <div class="product-info">
+              <h3>Pão de Queijo</h3>
+              <p>Quentinho, macio por dentro e dourado por fora.</p>
+              <div class="product-footer">
+                <strong>R$ 8,00</strong>
+                <button class="add-btn" data-name="Pão de Queijo" data-price="8.00">Adicionar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card" data-category="salgados">
+            <img src="https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=800&q=85" alt="Quiche">
+            <div class="product-info">
+              <h3>Quiche de Queijo</h3>
+              <p>Massa leve com recheio cremoso e sabor delicado.</p>
+              <div class="product-footer">
+                <strong>R$ 16,00</strong>
+                <button class="add-btn" data-name="Quiche de Queijo" data-price="16.00">Adicionar</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+        <article class="product-card" data-category="salgados">
+              <img src="/src/main/resources/static/img/pasteis.png"
+              <div class="product-info">
+                <h3>Pasteis gurmet</h3>
+                <p>Massas saborizadas e bem recheados.</p>S
+                <div class="product-footer">
+                  <strong>R$ 16,00</strong>
+                  <button class="add-btn" data-name="Quiche de Queijo" data-price="16.00">Adicionar</button>
+                </div>
+              </div>
+            </article>
+
+              <article class="product-card" data-category="salgados">
+              <img src="/src/main/resources/static/img/torta.png">
+              <div class="product-info">
+                <h3>torta de carne</h3>
+                <p>torta macia com as bordas recheadas.</p>
+                <div class="product-footer">
+                  <strong>R$ 16,00</strong>
+                  <button class="add-btn" data-name="Quiche de Queijo" data-price="16.00">Adicionar</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="product-card" data-category="doces">
+              <img src="/src/main/resources/static/img/docebanana.png">
+              <div class="product-info">
+                <h3>Doce de banana</h3>
+                <p>Massa leve com recheio cremoso e sabor delicado.</p>
+                <div class="product-footer">
+                  <strong>R$ 16,00</strong>
+                  <button class="add-btn" data-name="Quiche de Queijo" data-price="16.00">Adicionar</button>
+                </div>
+              </div>
+            </article>
+
+              <article class="product-card" data-category="doces">
+              <img src="/src/main/resources/static/img/pudim.png">
+              <div class="product-info">
+                <h3>pudim de chocolate</h3>
+                <p>pudim leve e saboroso de chocolate.</p>
+                <div class="product-footer">
+                  <strong>R$ 16,00</strong>
+                  <button class="add-btn" data-name="Quiche de Queijo" data-price="16.00">Adicionar</button>
+                </div>
+              </div>
+            </article>
+
+             <article class="product-card" data-category="doces">
+              <img src="/src/main/resources/static/img/pãomel.png">
+              <div class="product-info">
+                <h3>Pão de mel</h3>
+                <p>diversos recheios de doce.</p>
+                <div class="product-footer">
+                  <strong>R$ 4,00</strong>
+                  <button class="add-btn" data-name="Quiche de Queijo" data-price="16.00">Adicionar</button>
+                </div>
+              </div>
+            </article>
+
+              <article class="product-card" data-category="doces">
+              <img src="/src/main/resources/static/img/bolodepote.png">
+              <div class="product-info">
+                <h3>bolo de pote</h3>
+                <p>Massa leve com recheio cremoso e sabor delicado.</p>
+                <div class="product-footer">
+                  <strong>R$ 16,00</strong>
+                  <button class="add-btn" data-name="Quiche de Queijo" data-price="16.00">Adicionar</button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-logo">Cafeteria <span>e Felicidade</span></div>
+      <p>© 2026 Cafeteria e Felicidade. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

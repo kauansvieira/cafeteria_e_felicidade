@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pedidos | Cafeteria e Felicidade</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">Cafeteria <span>e Felicidade</span></a>
+
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="produtos.html" class="nav-link">Produtos</a>
+        <a href="pedidos.html" class="nav-link active">Pedidos</a>
+        <a href="login.html" class="nav-link">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="products-hero">
+      <div class="container">
+        <h1>Seu pedido</h1>
+        <p>Escolha seus produtos favoritos</p>
+      </div>
+    </section>
+
+    <section class="section orders">
+      <div class="container">
+        <div class="orders-wrap">
+          <div class="form-box">
+            <h3>Dados do pedido</h3>
+
+            <form id="orderForm">
+              <div class="form-row">
+                <div class="field">
+                  <label>Nome</label>
+                  <input type="text" id="clientName" required />
+                </div>
+
+                <div class="field">
+                  <label>Telefone</label>
+                  <input type="tel" id="clientPhone" required />
+                </div>
+              </div>
+
+              <div class="field">
+                <label>Endereço</label>
+                <input type="text" id="clientAddress" required />
+              </div>
+
+              <div class="form-row">
+                <div class="field">
+                  <label>Cidade</label>
+                  <input type="text" id="clientCity" required />
+                </div>
+
+                <div class="field">
+                  <label>CEP</label>
+                  <input type="text" id="clientZip" required />
+                </div>
+              </div>
+
+              <div class="field">
+                <label>Forma de pagamento</label>
+                <select id="paymentMethod">
+                  <option value="Dinheiro">Dinheiro</option>
+                  <option value="Cartão de Crédito">Cartão de Crédito</option>
+                  <option value="Cartão de Débito">Cartão de Débito</option>
+                  <option value="Pix">Pix</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label>Observações</label>
+                <textarea id="observations" placeholder="Ex: sem açúcar, sem gelo..."></textarea>
+              </div>
+
+              <button type="submit" class="submit-btn">Confirmar pedido</button>
+            </form>
+          </div>
+
+          <aside class="resume-box">
+            <h3>Resumo do pedido</h3>
+
+            <div id="cartItems" class="cart-items">
+              <p class="empty-message">Nenhum produto adicionado</p>
+            </div>
+
+            <div class="resume-item">
+              <span>Subtotal</span>
+              <strong id="subtotal">R$ 0,00</strong>
+            </div>
+
+            <div class="resume-item">
+              <span>Entrega</span>
+              <strong id="delivery">R$ 0,00</strong>
+            </div>
+
+            <div class="resume-item total">
+              <span>Total</span>
+              <strong id="total">R$ 0,00</strong>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-logo">Cafeteria <span>e Felicidade</span></div>
+      <p>© 2026 Cafeteria e Felicidade. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
